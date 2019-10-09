@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            #box{
+                width: 100%;
+                /* width:800px; */
+                background-color: red;
+                height: 100px;
+            }
+            </style>
+        </head>
+         <!-- !--    <meta name="viewport" content="width=device-width,initial-scale=2"/>--> 
+<!--    视觉视口的宽度变成了 400/2 是200  布局视口取400和200的最大值为400px-->
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=0.5"/> -->
+<!--    视觉视口的宽度变成了 device-width/0.5 是200  布局视口取400和200的最大值为400px-->
+<!--    <meta name="viewport" content="width=600"/>-->
+
+
+<!--    当width=device-width,initial-scale=1  起冲突的时候，布局视口的大小选最大值-->
+        <body>
+            <div id="box"></div>
+            <p>
+                星星如此闪耀，星光是美好的，你也是吗？星星如此闪耀，星光是美好的，你也是吗？星星如此闪耀，星光是美好的，你也是吗？
+            </p>
+            <script>
+                 console.log(window.screen.width);//理想视口的大小
+    console.log(window.innerWidth);//视觉视口大小
+    console.log(window.document.documentElement.clientWidth);//布局视口大小
+                </script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+@import"reset.css";
+@picwid:1080;
+@scale:16;
+@minWidth1:375px;
+@minWidth2:640px;
+@minWidth3:1200px;
+@Margin:0 auto;
+@color1:red;
+@color2:blue;
+@color3:#ccc;
+
+.container{
+    width: 640rem/@picwid*@scale;
+    .zht-color(#ccc);
+    margin: 0 auto;
+    .header{
+        width:600px; 
+        .zht-color(blue); 
+        height: 100rem/@picwid*@scale; 
+        margin:@Margin;
+
+    }
+    .row{
+        width:400px; 
+        margin:@Margin;
+         .col-md-3{
+             color: white;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        .zht-color(rgb(70, 24, 92)); 
+        }
+    }
+}
+// @media(min-width:@minWidth1){
+//    width: @minWidth1;
+// }
+// @media(min-width:@minWidth2){
+//     width: @minWidth2;
+//  }
+//  @media(min-width:@minWidth3){
+//     width: @minWidth3;
+//  }
+.zht-color(@color){
+    background-color: @color;
+}

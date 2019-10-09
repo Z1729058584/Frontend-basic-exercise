@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function warm_prompt(){
+        // var question=confirm("准备好了吗");//弹出提示
+        var name=prompt("are you ready","Yes");//弹出输入框
+        if(name=="Yes")
+        window.location="http://www.taobao.com";
+    }
+    var timer=setTimeout(warm_prompt,2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+       width: 100px;
+       height: 100px;
+       background-color: rgb(0, 0, 0);
+    }
+    </style>
+   
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+       
+        var oBox=document.querySelector("#box");
+        var animation=function(t,b,c,d){
+         return c*t/d+b;
+        };
+        var t=0;
+        var b=0;
+        var c=52;
+        var d=2000;
+    var timer=setInterval(function(){
+    t+=10;
+    var red=animation(t,b,52,d);
+    var green=animation(t,b,113,d);
+    var blue=animation(t,b,44,d);
+    oBox.style.backgroundColor='rgb('+red+','+green+','+blue+')';
+    console.log(oBox.style.backgroundColor);
+    
+    if(t>=d){
+        clearInterval(timer);
+    }
+    },10);
+    </script>
+</body>
+</html>

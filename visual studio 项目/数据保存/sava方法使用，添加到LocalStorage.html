@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="###" id="form">
+        用户名：<input type="text" id="use" name="user">
+        密码：  <input type="password" id="pas" name="password">
+    </form>
+    <button id="btn">提交</button>
+    <button id="stamp">打印</button>
+    
+    <script>
+    var oUser=document.querySelector("#use");
+    var oPas=document.querySelector("#pas");
+    var oBtn=document.querySelector("#btn");
+    var oForm=document.querySelector("#form");
+    var oStamp=document.querySelector('#stamp');
+   
+    oStamp.onclick=function(){
+        localStorage.user=oUser.value;
+        console.log(localStorage.user);
+        
+    }
+    // oForm.onsubmit=function(){
+            // localStorage.setItem(oUser.name,oUser.value);
+            // localStorage.setItem(oPas.name,oPas.value);     
+            // console.log(localStorage.getItem("user"));//获取LocalStorage的值
+            // console.log(2);    
+            // return false;  
+    // }
+  
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+       
+       body,html{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #app {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100%;
+         height: 100%;
+        }
+
+        .box { 
+            width: 100px;
+            height: 100px;
+            background-color: rgb(135, 145, 200);
+        }
+
+    </style>
+    <script src="./Vconsole/vconsole.min.js"></script>
+    <script src="js/transformCSS.js"></script>
+    <link rel="stylesheet" href="./css/reset.css">
+</head>
+
+
+<body>
+    <div id="app">
+        <div class="box"></div>
+    </div>
+    <script>
+        document.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+        }, {
+            passive: false
+        })
+        var oBox = document.querySelector('.box');
+
+        function gesture(node, callback) {
+            node.addEventListener('touchstart', function (e) {
+                // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+                if (e.targetTouches.length >= 2) {
+                    this.disx1 = getjuli(e.targetTouches[0], e.targetTouches[1]);
+                    this.disa1 = jiaodu(e.targetTouches[0], e.targetTouches[1]);
+                    if (callback && typeof callback.start === 'function') {
+                        callback.start(e);
+                    }
+                }
+            })
+            node.addEventListener('touchmove', function (e) {
+                // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+                if (e.targetTouches.length >= 2) {
+                    this.disx2 = getjuli(e.targetTouches[0], e.targetTouches[1]);
+                    this.disa2 = jiaodu(e.targetTouches[0], e.targetTouches[1]);
+                    var rotatea = this.disa2 - this.disa1;
+                    var scalex = this.disx2 / this.disx1;
+                    e.scalex = scalex;
+                    e.rotatea = rotatea;
+
+                    if (callback && typeof callback.change === 'function') {
+                        callback.change(e);
+                    }
+                }
+            })
+        }
+
+        function getjuli(p1, p2) {
+            var disx = p2.clientX - p1.clientX;
+            var disy = p2.clientY - p1.clientY;
+            return Math.sqrt(disx * disx + disy * disy);
+        }
+
+        function jiaodu(a1, a2) {
+            var disa1 = a2.clientY - a1.clientY;
+            var disa2 = a2.clientX - a1.clientX;
+            return Math.atan2(disa1, disa2) * 180 / Math.PI;
+        }
+        gesture(oBox, {
+            start: function (e) {
+                this.scalex = transformCSS(oBox, 'scale');
+                this.rot = transformCSS(oBox, 'rotate');
+                this.top = transformCSS(oBox, 'translateY');
+                this.left = transformCSS(oBox, 'translateX');
+                this.x = e.targetTouches[0].clientX;
+                this.y = e.targetTouches[0].clientY;
+            },
+            change: function (e) {
+                transformCSS(oBox, 'scale', e.scalex * this.scalex);
+                transformCSS(oBox, 'rotate', e.rotatea + this.rot);
+
+                this._x = e.targetTouches[0].clientX;
+                this._y = e.targetTouches[0].clientY;
+
+                var disx = this._x - this.x + this.left;
+                var disy = this._y - this.y + this.top;
+
+                var tranx = disx + oBox.offsetWidth / 2;
+                var trany = disy + oBox.offsetHeight / 2;
+
+                oBox.style.transformOrigin = tranx + 'px ' + trany + 'px';
+                console.log(oBox.style.transformOrigin + ">>>>>>>");
+                transformCSS(oBox, 'translateX', disx);
+                transformCSS(oBox, 'translateY', disy);
+            }
+        })
+        var vs = new VConsole();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 500px;
+        height: 500px;
+        background-color: purple;
+        margin: 0 auto;
+    }
+    </style>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+     
+    var oInner=null;
+    var oBox=document.querySelector("#box");
+    oBox.onclick=function(){
+        if(oInner){
+            oInner.parentNode.removeChild(oInner);
+            oInner=null; 
+        }
+        else if(!oInner){
+            oInner=document.createElement("div");
+            oInner.innerHTML="您好";
+            // oInner.style.cssText="color:red;background-color:blue;width:100px;height:100px;";
+            oBox.appendChild(oInner);
+            $("#box div").css({
+                "width":"100px","height":"100px","backgroundColor":"green"
+            });
+            console.log($("#box div").css(("width","100px"),("height","100px"),("backgroundColor","green")) );
+        }
+    }
+    </script>
+</body>
+</html>

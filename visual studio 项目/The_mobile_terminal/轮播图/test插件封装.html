@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .wrap_content {
+            width: 100%;
+            position: relative;
+        }
+
+        .swiper-wrapper {
+            position: absolute;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper .swiper-slide {
+            float: left;
+        }
+
+        .swiper-slide img {
+            font-size: 0;
+            width: 100%;
+        }
+
+        .swiper-pagination {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+        }
+
+        .swiper-pagination span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 2px;
+            background-color: white;
+        }
+
+        .swiper-pagination .active {
+            background-color: black;
+        }
+    </style>
+    <script src="./js/myjs.js"></script>
+    <link rel="stylesheet" href="./css/reset.css">
+    <script src="js/holder.js"></script>
+    <script src="./js/swiper.js"></script>
+</head>
+
+<body>
+    <div class="wrap_content">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="./img/1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/2.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/3.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/4.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/5.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/2.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/3.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/4.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./img/5.jpg" alt=""></div>
+        </div>
+        <div class="swiper-pagination">
+        </div>
+    </div>
+    <script>
+        Swiper('.wrap_content',{loop : true, auto: true, time: 2000,  pagination: true});
+       
+    </script>
+
+</body>
+
+</html>

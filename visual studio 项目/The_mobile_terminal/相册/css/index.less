@@ -1,0 +1,86 @@
+@import "reset.css";
+@scale: 16;
+@picrem: 1080;
+html,body,.app{
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+.app{
+.header{
+    width: 100vw;
+    height: 10Vh;
+    background:#000;
+    text-align: center;
+    line-height: 10vh;
+    font-family: 宋体;
+    font-size: 20px;
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+#container{
+    width: 100vw;
+    height: 90vh;
+}
+#wrapper{
+    position: relative;
+}
+#wrapper ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+#wrapper li{
+    width: 44vw;
+    height: 44vw;
+    margin: 3vw;
+    border-radius: 3vw;
+    overflow: hidden;
+    background: #eee url("../img/loadingImg.gif") center center no-repeat;
+    img{
+        width: 100%;
+        transition: all 1s;
+    }    
+
+}
+.scroll-bar{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4px;
+    height: 100px;
+    background:rgba(0, 0, 0, .7);
+    z-index: 10;
+}
+.bottom{
+    height: 20vh;
+    width: 100vw;
+    position: absolute;
+    bottom: -20vh;
+    text-align: center;
+    line-height: 20vh;
+    font-family: 宋体;
+    font-size: 20px;
+}
+#big-image header{
+    width: 100vw;
+    height: 10vh;
+    background-color: #000;
+    text-align: center;
+    line-height: 10vh;
+    color: white;
+    font-family: 宋体;
+    font-size: 20px;
+}
+#close{
+   position: absolute;
+   right: 10px; 
+}
+#big-image section{
+    width: 100vw;
+    height: 90vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+}

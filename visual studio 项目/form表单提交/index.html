@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+    <form action="http://www.baidu.com">
+        <label for="user">用户名：</label><input type="text" id="user" name="用户名" ><br>
+        <label for="password">密码：</label><input type="text" id="password" name="密码"> <label id="remind"></label><br>
+       
+        <label for="e-mail">邮箱</label><input type="text" id="e-mail" name="邮箱"><br>
+        <label for="phone">手机号：</label><input type="text" id="phone" name="手机号"><br>
+        <label for="color">十六进制颜色正则：</label><input type="text" id="color" name="颜色"><br>
+        <label for="carid">车牌号：</label><input type="text" id="carid" name="车牌号"><br>
+        <button id="btn" >提交</button>
+    </form>
+    <script>
+        var reg1=/^[a-zA-Z][a-zA-Z0-9]{3,15}$/;
+        var reg2=/^[a-zA-Z0-9]{4,10}$/;
+        var reg3=/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        var reg4=/^1\d{10}$/;
+        var reg5=/^#[\da-f]{3}([\da-f]{3})?$/i;
+        var reg6=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+        // $("#remind").val("用户名或密码输入错误");
+        var flag=true;
+        $("#user")[0].onchange=function(){
+            if(reg1.test($("#user").val()) ){
+                // $("#user")[0].style.border="1px solid green";
+                $("#user").css({"border":"1px solid green"});
+                flag=true;
+            }
+            else{
+                $("#user").css({"border":"1px solid red"});
+                // $("#user")[0].style.border="1px solid red";
+                flag=false;
+                
+            }
+        }
+        $("#password")[0].onchange=function(){
+            if(reg2.test($("#password").val()) ){
+                // $("#user")[0].style.border="1px solid green";
+                $("#password").css({"border":"1px solid green"});
+                flag=true;
+            }
+            else{
+                $("#password").css({"border":"1px solid red"});
+                // $("#user")[0].style.border="1px solid red";
+                flag=false;
+                $("#remind").html("用户名或密码格式输入错误");
+                
+            }
+        }
+        $("#e-mail")[0].onchange=function(){
+            if(reg3.test($("#e-mail").val()) ){
+                // $("#user")[0].style.border="1px solid green";
+                $("#e-mail").css({"border":"1px solid green"});
+                flag=true;
+            }
+            else{
+                $("#e-mail").css({"border":"1px solid red"});
+                // $("#user")[0].style.border="1px solid red";
+                flag=false;
+            }
+        }
+        $("#phone")[0].onchange=function(){
+            if(reg4.test($("#phone").val()) ){
+                // $("#user")[0].style.border="1px solid green";
+                $("#phone").css({"border":"1px solid green"});
+                flag=true;
+            }
+            else{
+                $("#phone").css({"border":"1px solid red"});
+                // $("#user")[0].style.border="1px solid red";
+                flag=false;
+            }
+        }
+        $("#color")[0].onchange=function(){
+            if(reg5.test($("#color").val()) ){
+                // $("#user")[0].style.border="1px solid green";
+                $("#color").css({"border":"1px solid green"});
+                flag=true;
+            }
+            else{
+                $("#color").css({"border":"1px solid red"});
+                // $("#user")[0].style.border="1px solid red";
+                flag=false;
+            }
+        }
+        $("#carid")[0].onchange=function(){
+            if(reg6.test($("#carid").val()) ){
+                // $("#user")[0].style.border="1px solid green";
+                $("#carid").css({"border":"1px solid green"});
+                flag=true;
+            }
+            else{
+                $("#carid").css({"border":"1px solid red"});
+                // $("#user")[0].style.border="1px solid red";
+                flag=false;
+            }
+        }
+        $("#btn").on("click",function(e){
+          var e=e||window.event;
+          if(flag){
+              Form.submit();
+          }
+          else{
+              alert("输入有误");
+              e.preventDefault?e.preventDefault():e.returnValue=false;
+          }
+        })
+
+
+      
+    </script>
+</body>
+</html>

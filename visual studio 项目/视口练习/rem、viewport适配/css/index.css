@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  width: 16rem;
+  height: 15rem;
+  background-color: red;
+}
+.left {
+  width: 10rem;
+  height: 10rem;
+  background-color: green;
+  float: left;
+}
+.right {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: blue;
+  float: right;
+}

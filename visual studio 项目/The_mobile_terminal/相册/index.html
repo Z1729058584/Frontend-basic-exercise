@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">三国女将</header>
+        <div id="container">
+            <div id="wrapper">
+                <ul id="imgList"></ul>
+                <div class="bottom">上拉加载更多数据</div>
+            </div>
+            <div class="scroll-bar"></div>
+        </div>
+        <!--大图预览区域-->
+        <div id="big-image">
+            <header>
+                大图预览
+                <span id="close">&times;</span>
+            </header>
+            <section>
+                <img id="bigImage" src="./img/1.jpg" alt="">
+            </section>
+        </div>
+    </div>
+    <script src="./js/transformCSS.js"></script>
+    <script src="./js/tweenAnimation.js"></script>
+    <script src="./js/touchscroll.js"></script>
+
+    <script>
+        //获取元素
+        var app = document.querySelector(".app");
+        var close = document.querySelector("#close");
+        var bigImage = document.querySelector("#bigImage");
+        var container = document.querySelector('#container');
+        var wrapper= document.querySelector('#wrapper');
+        var imgList = document.querySelector('#imgList');
+        var bottom= document.querySelector('.bottom');
+        var scrollBar= document.querySelector('.scroll-bar');
+        var header=document.querySelector('.header');
+        var isScrolling=false;//状态变量 是否正在滑动
+        //定义下标
+        var index=0;
+        var num=20;
+        var page = 1;//分页的意思
+        var len = 50;
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 16 + "px";
+    //1.内容可滚动
+    var touchscroll=new Touchscroll('#container','#wrapper',{
+        start:function(){},
+        move:function(){
+            //懒加载检测
+            lazyload();
+            //控制底部文本元素的显示比例
+            //计算最小的translateY的值
+            var minTranslateY= -(wrapper.offsetHeight-container.offsetHeight);
+            //判断是否超过了临界点
+            //获取当前的translateY的值
+            var currentTranslateY=transformCSS(wrapper,'translateY');
+            //越界了
+            if(currentTranslateY<=minTranslateY){
+                //计算差值
+                var disY=minTranslateY-currentTranslateY;
+                //计算比例
+                var scale=disY/bottom.offsetHeight;
+                //设置元素的显示比例
+                transformCSS(bottom,'scale',Math.min(scale,1));
+            }
+            isScrolling=true;
+        },
+        end:function(){
+              //计算最小的 translateY 的值
+              var minTranslateY = -(wrapper.offsetHeight - container.offsetHeight);
+            //判断是否超过了临界点
+            //获取当前的 translateY 的值
+            var currentTranslateY = transformCSS(wrapper, 'translateY');
+            var disY = minTranslateY - currentTranslateY;
+            if(disY >= bottom.offsetHeight){
+                createLi();
+            }
+            isScrolling = false;
+        }
+        
+    })
+    //2.动态创建元素
+    //创建数据集 100个图片数据[1.jpg,2.jpg....100.jpg]
+    var imgArr=[];
+    for(var i=0;i<len;i++){
+        // 拼接图片的路径
+        var imgSrc='./img/'+(i%18)+'.jpg';
+        //将图片路径压入数组
+        imgArr.push(imgSrc);
+    }
+    //动态创建
+    function createLi(){
+        //创建多少个
+        var start =(page-1)*num;
+        var end = page*num-1;
+        for(var i = start; i<= end; i++){
+            //判断数据的临界点
+            if(i>=len){
+                // 跳出循环
+                bottom.innerHTML="没有数据了!!";
+                break;
+            }
+            //动态创建li
+            var li = document.createElement('li');
+            //创建Img标签
+            var img = document.createElement('img');
+            img.style.opacity = 0;
+            //修改img的src属性
+            //img.src=imgArr[i];
+            //设置自定义属性
+            img.setAttribute('imgsrc',imgArr[i]);
+            li.appendChild(img);
+            //li插入到ul中
+            imgList.appendChild(li);
+            //设置初始化属性
+            li.isLoaded = false;
+        }
+        //分页页码自增
+        page++;
+        //运行懒加载
+        lazyload();
+        //计算当前滚动条的位置
+        var translateY = transformCSS(wrapper,'translateY');
+        var wrapperHeight = wrapper.offsetHeight;
+        var t = -translateY / wrapperHeight * container.offsetHeight;
+        // 设置滚动条的位置
+        scrollBar.style.top = t + 'px';
+    }
+    createLi();
+    //懒加载实现 The Lazy Song
+    function lazyload(){
+         //获取所有的 li
+         var lis = imgList.querySelectorAll('li');
+        //遍历
+        lis.forEach(function (li) {
+        //获取所有的li元素进行状态检测
+        if(li.isLoaded) return;
+        //计算当前li的尺寸
+        var size = li.getBoundingClientRect();
+        if(size.top<=app.offsetHeight+100 && size.bottom >= header.offsetHeight){
+        //进入可视区域中， 图片需要加载 设置src属性
+        setTimeout(function(){
+                    //获取img元素
+                    var img = li.querySelector('img');
+                    //获取图片的 src 属性
+                    var src = img.getAttribute('imgsrc');
+                    //设置
+                    img.src = src;
+                    img.addEventListener('load', function(){
+                        this.style.opacity = 1;
+                    });
+
+                    img.addEventListener('error', function(){
+                        this.src = './img/noimage.png';
+                    });
+                }, 2000);
+                //设置状态为加载完毕
+                li.isLoaded = true;
+        }
+    });
+    }
+    lazyload();
+     //事件委托
+     imgList.addEventListener('touchend', function(e){
+        if(isScrolling) return;
+        //获取当前图片的路径
+        //检测为图片元素
+        if(e.target.nodeName === 'IMG'){
+            //获取图片的路径
+            var src = e.target.src;
+            //设置大图的 src 路径
+            bigImage.src = src;
+            //修改过渡的起始位置
+            var x = e.changedTouches[0].clientX;
+            var y = e.changedTouches[0].clientY;
+            bigImageArea.style.transformOrigin = x+'px '+y+'px';
+            //显示大图预览区
+            transformCSS(bigImageArea,'scale', 1);
+        }
+    });
+
+    //关闭按钮
+    close.addEventListener('touchstart', function(e){
+        //设置 大图显示区域比例为 0
+        transformCSS(bigImageArea, 'scale', 0);
+    });
+    </script>
+</body>
+
+</html>

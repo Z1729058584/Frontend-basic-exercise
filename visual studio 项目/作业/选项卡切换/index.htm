@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="header">
+            <p class="active">第一个标题</p>
+            <p>第二个标题</p>
+            <p>第三个标题</p>
+        </div>
+        <div class="content">
+            <div class="show">第一个内容</div>
+            <div>第二个内容</div>
+            <div>第三个内容</div>
+        </div>
+    </div>
+    <script>
+        var oHeader = document.querySelector(".header");
+        var oP = document.querySelectorAll("p");
+
+        var oContent=document.querySelector(".content");
+        var oDiv=oContent.querySelectorAll("div");
+
+        oHeader.onclick = function (e) {
+            var e = e || window.event;
+            console.log(e.target.nodeName);
+            console.log(e.target.parentNode.className);
+            for(var i=0;i<oP.length;i++){
+            oP[i].className="";
+            oDiv[i].className="";
+            if (e.target.nodeName = "P" && e.target.parentNode.className == "header") {
+                console.log(1);
+                e.target.className = "active";
+                oDiv[[].indexOf.call(oP,e.target)].className="show";
+            }
+
+            }
+        }
+    </script>
+</body>
+
+</html>

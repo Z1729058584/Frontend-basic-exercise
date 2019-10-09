@@ -1,0 +1,31 @@
+.make-container();
+
+
+.make-row();
+
+
+.make-column();
+
+
+.make-grid-columns-width(xs);
+
+
+.make-grid-columns-offset(xs);
+
+//小屏幕下的尺寸与列偏移设置
+@media (min-width: @screen-sm) {
+    .make-grid-columns-width(sm);
+    .make-grid-columns-offset(sm);
+}
+
+//中等屏幕下的尺寸与列偏移设置
+@media (min-width: @screen-md) {
+    .make-grid-columns-width(md);
+    .make-grid-columns-offset(md);
+}
+
+//大屏幕下的尺寸与列偏移设置
+@media (min-width: @screen-lg) {
+    .make-grid-columns-width(lg);
+    .make-grid-columns-offset(lg);
+}

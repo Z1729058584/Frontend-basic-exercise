@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <progress max="100" id="pro">
+    </progress>
+    <span id="con"></span>
+    <script>
+        var oPro=document.querySelector("#pro");
+        var oCon=document.querySelector("#con");
+        var v=0;
+        var num=0;
+        for(var i=1;i<22;i++){
+            i<10?v="0"+ i:v=i;
+            var newImg=new Image();
+            newImg.src="./img/"+v+".jpg";
+            newImg.onload=function(){
+                num++;
+                var proNum=Math.ceil(num/21*100);
+                oPro.value=proNum;
+                oCon.innerHTML=proNum+"%"
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>懒加载测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body,html,#app{
+            width: 100%;
+            height: 100%;
+        }
+        ul {
+            list-style: none;
+        }
+
+
+
+        #content {
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        #content .item {
+            width: 44vw;
+            height: 44vw;
+            flex: none;
+            border: solid 1px #ddd;
+            margin-bottom: 20px;
+        }
+
+        #content .item img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="content">
+            <div class="item" data-src="https://picsum.photos/id/1/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/2/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/3/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/4/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/5/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/6/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/7/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/8/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/9/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/10/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/11/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/12/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/13/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/14/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/15/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/16/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/17/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/18/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/19/200/200">
+                <img src="" alt="">
+            </div>
+            <div class="item" data-src="https://picsum.photos/id/20/200/200">
+                <img src="" alt="">
+            </div>
+        </div>
+        <div class="scroll-bar"></div>
+    </div>
+    <script>
+        // var imgArr=[];
+        // for(var i=0;i<100;i++){
+        //     //拼接图片路径
+        //     var imgSrc=
+        // }
+        var app = document.querySelector('#app');
+        var oItem = document.querySelectorAll(".item");
+        oItem.forEach(function (item) {
+            var size = item.getBoundingClientRect();
+            console.log(app.offsetHeight);
+
+            if (size.top <= app.offsetHeight + 100) {
+                var img = item.querySelector('img');
+                var src = item.dataset.src;
+                img.src=src;
+
+            }
+        })
+        app.addEventListener('touchmove',function(){
+            oItem.forEach(function (item) {
+            var size = item.getBoundingClientRect();
+            console.log(app.offsetHeight);
+            var scrolltop=document.documentElement.scrollTop;
+            console.log(scrolltop);
+            
+            if (size.top <= app.offsetHeight + scrolltop) {
+                var img = item.querySelector('img');
+                var src = item.dataset.src;
+                img.src=src;
+
+            }
+        })
+        })
+    </script>
+</body>
+
+</html>

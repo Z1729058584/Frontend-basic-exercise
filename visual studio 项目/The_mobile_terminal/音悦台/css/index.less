@@ -1,0 +1,335 @@
+@import "reset.css";
+@Picrem: 1080;
+@Scale: 16;
+
+//清除浮动
+.clearFixed::after {
+  display: block;
+  content: "\200B";
+  clear: both;
+  height: 0;
+}
+//清除系统滚动条
+body,html{
+  height: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+// 整体内容
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  // 头部区域
+  .header {
+    background-color: #232323;
+    // height: 250rem/@Picrem*@Scale;
+    position: relative;
+    z-index: 10;
+
+    .header_1 {
+      height: 135rem/@Picrem*@Scale;
+
+      .logo {
+        padding: 26rem/@Picrem*@Scale 17rem/@Picrem*@Scale 21rem/@Picrem*@Scale 17rem/@Picrem*@Scale;
+        float: left;
+
+        img {
+          width: 240rem/@Picrem*@Scale;
+          height: 88rem/@Picrem*@Scale;
+        }
+      }
+
+      .channel {
+        float: left;
+        width: 129rem/@Picrem*@Scale;
+        height: 135rem/@Picrem*@Scale;
+        background: url("../img/menuBtn.png") 16rem/@Picrem*@Scale 0 no-repeat;
+        background-size: 82rem/@Picrem*@Scale, 233rem/@Picrem*@Scale;
+        margin-top: 21rem/@Picrem*@Scale;
+      }
+
+      .channelList {
+        position: absolute;
+        top: 135rem/@Picrem*@Scale;
+        padding: 10rem/@Picrem*@Scale 0 10rem/@Picrem*@Scale;
+        border-top: 1rem/@Picrem*@Scale solid #6a6a6a;
+        background-color: rgba(0, 0, 0, .8);
+        z-index: 2;
+        display: none;
+
+        a {
+          font-size: 54rem/@Picrem*@Scale;
+          display: inline-block;
+          width: 22.5%;
+          line-height: 135rem/@Picrem*@Scale;
+          height: 135rem/@Picrem*@Scale;
+          text-align: center;
+          color: white;
+          font-weight: bold;
+        }
+      }
+
+      .log {
+        float: right;
+        padding-top: 21rem/@Picrem*@Scale;
+
+        a {
+          display: inline-block;
+          width: 111rem/@Picrem*@Scale;
+          height: 78rem/@Picrem*@Scale;
+          line-height: 78rem/@Picrem*@Scale;
+          background-color: #690;
+          color: #CCC;
+          margin-right: 15rem/@Picrem*@Scale;
+          font-size: 42rem/@Picrem*@Scale;
+          text-align: center;
+          border-radius: 8%;
+        }
+
+        .search {
+          width: 130rem/@Picrem*@Scale;
+          height: 88rem/@Picrem*@Scale;
+          line-height: 88rem/@Picrem*@Scale;
+          color: #fff;
+          margin-right: 30rem/@Picrem*@Scale;
+          margin-top: 3px;
+          font-weight: bold;
+          border-radius: 10%;
+        }
+      }
+    }
+
+    .header_2 {
+      height: 103rem/@Picrem*@Scale;
+      padding: 16rem/@Picrem*@Scale;
+
+      input {
+        box-sizing: border-box;
+        width: 829rem/@Picrem*@Scale;
+        height: 103rem/@Picrem*@Scale;
+        background-color: #999;
+        padding: 5rem/@Picrem*@Scale 10rem/@Picrem*@Scale 5rem/@Picrem*@Scale 10rem/@Picrem*@Scale;
+        border: 1rem/@Picrem*@Scale solid #5a5a5a;
+        font-size: 41rem/@Picrem*@Scale;
+        color: #333;
+        border-radius: 15px;
+
+        &:focus {
+          background-color: white;
+        }
+      }
+
+      #bigsearch {
+        width: 203rem/@Picrem*@Scale;
+        height: 103rem/@Picrem*@Scale;
+        border: 0;
+        background-color: #414040;
+        font-size: 41rem/@Picrem*@Scale;
+        border-radius: 15rem/@Picrem*@Scale;
+        color: #fff;
+      }
+    }
+  }
+
+  //导航
+  .nav {
+    width: 100%;
+    overflow: hidden;
+    padding: 31rem/@Picrem*@Scale 0 14rem/@Picrem*@Scale;
+    height: 132rem/@Picrem*@Scale;
+    position: relative;
+    z-index: 10;
+    background-color: white;
+
+    .nav_1 {
+      position: absolute;
+      white-space: nowrap;
+
+      //a标签
+      a {
+        height: 129rem/@Picrem*@Scale;
+        line-height: 129rem/@Picrem*@Scale;
+        color: #020202;
+        font-size: 67.5rem/@Picrem*@Scale;
+        display: inline-block;
+        text-align: center;
+        padding: 0 38rem/@Picrem*@Scale 0;
+
+        &.show {
+          background-color: #690;
+          color: white;
+        }
+      }
+
+    }
+
+  }
+
+  //主题部分
+  .content {
+
+    // 轮播图
+    .wrap_content {
+      width: 100%;
+      position: relative;
+
+      // overflow: hidden;
+      .swiper-wrapper {
+        position: absolute;
+        // overflow: hidden;
+      }
+
+      .swiper-wrapper .swiper-slide {
+        float: left;
+      }
+
+      .swiper-slide img {
+        font-size: 0;
+        width: 100%;
+      }
+
+      .swiper-pagination {
+        text-align: center;
+        position: absolute;
+        bottom: 10/1080*16rem;
+        left: 0;
+        width: 100%;
+      }
+
+      .swiper-pagination span {
+        display: inline-block;
+        width: 30/1080*16rem;
+        height: 30/1080*16rem;
+        border-radius: 50%;
+        margin: 0 10/1080*16rem;
+        background-color: white;
+      }
+
+      .swiper-pagination .active {
+        background-color: black;
+      }
+    }
+
+    //视频种类
+    .TV {
+      .selection {
+        .menu_head {
+          height: 135rem/@Picrem*@Scale;
+          line-height: 135rem/@Picrem*@Scale;
+          display: flex;
+          justify-content: space-between;
+
+          h3 {
+            font-size: 67.5rem/@Picrem*@Scale;
+            font-weight: bold;
+
+          }
+
+          span {
+            display: inline-block;
+            font-size: 35rem/@Picrem*@Scale;
+          }
+        }
+
+        .place_select {
+          a {
+            font-size: 40rem/@Picrem*@Scale;
+            padding: 10rem/@Picrem*@Scale;
+            width: 100rem/@Picrem*@Scale;
+            height: 40rem/@Picrem*@Scale;
+          }
+        }
+
+        .select_strip {
+          width: 100rem/@Picrem*@Scale;
+          height: 20rem/@Picrem*@Scale;
+          background-color: green;
+        }
+
+        .menu_videos {
+          width: 100%;
+          .menu_videos_1 {
+            width: 400%;
+            .videos {
+              display: flex;
+              flex-wrap: wrap;
+              width: 25%;
+              background: url(./img/loading.gif) center center no-repeat;
+              background-size: 50rem/@Picrem*@Scale 50rem/@Picrem*@Scale;
+              .menu_video {
+                width: 45%;
+                margin: 20rem/@Picrem*@Scale;
+                .video {
+                  width: 100%;
+                  height: 245px;
+                  #s1 {
+                    width: 100%;
+                    height: 100%;
+                  }
+                }
+
+                .p1 {
+                  height: 50rem/@Picrem*@Scale;
+                  width: 100%;
+                  font-size: 35rem/@Picrem*@Scale;
+                  line-height: 50rem/@Picrem*@Scale;
+                }
+
+                .about {
+                  height: 50rem/@Picrem*@Scale;
+                  width: 100%;
+                  font-size: 35rem/@Picrem*@Scale;
+                  display: flex;
+
+                  .a1 {
+                    background: url(../img/ice.png) center 4px no-repeat;
+                    display: block;
+                    background-size: 35rem/@Picrem*@Scale 100rem/@Picrem*@Scale;
+                    width: 35rem/@Picrem*@Scale;
+                    height: 50rem/@Picrem*@Scale;
+                  }
+
+                  .a2 {
+                    background: url(../img/ice.png) center -50rem/@Picrem*@Scale no-repeat;
+                    display: block;
+                    background-size: 35rem/@Picrem*@Scale 100rem/@Picrem*@Scale;
+                    width: 35rem/@Picrem*@Scale;
+                    height: 50rem/@Picrem*@Scale;
+                  }
+
+                  span {
+                    margin-right: 15rem/@Picrem*@Scale;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 自定义滚动条
+  .scroll {
+    width: 20rem/@Picrem*@Scale;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 20;
+
+    .slide_block {
+      width: 20rem/@Picrem*@Scale;
+      height: 500rem/@Picrem*@Scale;
+      background-color: rgba(0, 0, 0, .5);
+      border-radius: 10rem/@Picrem*@Scale 10rem/@Picrem*@Scale;
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .show{
+         width: 100px;
+         height: 100px;
+         margin: 0 auto;
+         background-color: red;
+         visibility: visible;
+         
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+        var oBox=document.querySelector("#box");
+        document.onkeydown=function(ev){
+            var e=ev||window.event;
+            if(e.shiftKey){
+                hide(oBox);
+                highlight(oBox);
+                alert("对头");
+            }
+            else{
+                hide(oBox,1);//参数可以传元素
+                alert("sorry");
+            }
+        }
+        function hide(yes,fei){
+          if(fei){
+              yes.style.display="none";
+          }
+          else{
+              yes.style.visibilty="hidden";
+          }
+        }
+        function highlight(yes){
+            if(!yes.className){
+                yes.className="show";
+            }
+        }
+        </script>
+</body>
+</html>

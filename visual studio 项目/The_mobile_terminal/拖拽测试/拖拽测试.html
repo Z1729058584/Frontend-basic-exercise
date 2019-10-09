@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>微信视频聊天</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style:none;
+        }
+        html,body,#app{
+            width:100%;
+            height:100%;
+            overflow: hidden;
+        }
+        #app{
+            background: url("./img/a.jpg") no-repeat;
+            background-size: cover;
+        }
+        #profile{
+            width: 120px
+        }
+    </style>
+    <script src="js/transformCSS.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="profile"><img width="100%" src="./img/me.jpg" alt=""></div>
+    </div>
+    <script>
+    var oProfile=document.querySelector("#profile");
+    var oApp=document.querySelector("#app");
+    oProfile.addEventListener("touchstart",function(e){
+           this.x=e.changedTouches[0].clientX;
+           this.y=e.changedTouches[0].clientY;
+           oProfile.style.transition="none";
+
+           this.top=transformCSS(oProfile,"translateY");
+
+           this.left=transformCSS(oProfile,"translateX");
+    })
+    oProfile.addEventListener("touchmove",function(e){
+           this._x=e.changedTouches[0].clientX;
+           this._y=e.changedTouches[0].clientY;
+
+           var translateX=this._x-this.x+this.left;
+           var translateY=this._y-this.y+this.top;
+           transformCSS(oProfile,"translateY",translateY);
+
+           transformCSS(oProfile,"translateX",translateX);
+    })
+    // oProfile.addEventListener("touchend",function(e){
+    //        this._x=e.changedTouches[0].clientX;
+    //        var translateX=transformCSS(oProfile,"translateX");
+    //        var translateY=transformCSS(oProfile,"translateY");
+    //        var scale=(oApp.clientWidth-oProfile.clientWidth)/2;
+    //        if(translateX<=scale){
+    //            translateX=0;
+    //        }
+    //        if(translateX>=scale){
+    //            translateX=oApp.clientWidth-oProfile.clientWidth;
+    //        }
+    //        transformCSS(oProfile,"translateX",translateX);
+    //        transformCSS(oProfile,"translateY",translateY);
+           
+    //        oProfile.style.transition="all 0.5";
+    // })
+
+    </script>
+</body>
+</html>

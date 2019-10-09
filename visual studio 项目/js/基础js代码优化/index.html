@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代码优化与重构</title>
+</head>
+<body>
+<script>
+    /*
+        1、for循环
+     */
+    for (var i = 0; i < arr.length; i++) {
+        //bad
+    }
+
+    for (var i = 0,len = arr.length; i < len; i++) {
+        //每次遍历的时候，都不需要在去访问数组的长度
+    }
+
+    /*
+        2、判断
+     */
+
+    if (value == ""){
+        //code
+    }
+
+    if (!value){
+        //code
+    }
+
+
+    /*
+        3、判断
+     */
+
+    if (age>10){
+        name = "xiaowang"
+    }else{
+        name = "laowang"
+    }
+
+    age>10 ? name = "xiaowang" :name = "laowang";
+
+    name = age>10 ? "xiaowang" : "laowang";
+
+
+    /*
+        3、判断
+     */
+
+    if (age>10){
+        name = "xiaowang"
+    }else{
+        name = "laowang"
+    }
+
+    age>10 ? name = "xiaowang" :name = "laowang";
+
+    name = age>10 ? "xiaowang" : "laowang";
+
+
+    /*
+        4、函数
+     */
+
+    function fn(name,age,sex,color) {
+
+    }
+
+    var obj = {
+        name:"",
+        age:"",
+        sex:""
+    }
+    function fn(obj) {
+        // 可以把多个参数放在对象中传值
+    }
+
+
+
+    /*
+        5、判断
+     */
+    if (typeof obj == "object"){
+
+    }
+
+    if (typeof obj === "object"){
+        //一直相同类型的判断，尽量使用 全等  这样可以节省数据类型转换
+    }
+
+
+    /*
+        6、DOM
+     */
+    var str = ""
+    for (var i = 0; i < 100; i++) {
+        var newStr = "123";
+        str+=newStr;//+=这种字符串拼接的方法特别耗费效率
+    }
+
+
+    var str = ""
+    var arr = [];
+    for (var i = 0; i < 100; i++) {
+        var newStr = "123";
+        arr[i] = newStr;//插入数组是比 字符串拼接效率高很多
+    }
+    str = arr.join(",");
+
+
+    /*
+        7、查询
+     */
+    var con1 = document.getElementById("con1");
+    var con2 = document.getElementById("con2");
+    var con3 = document.getElementById("con3");
+    var con4 = document.getElementById("con4");
+    var con5 = document.getElementById("con5");
+    var con6 = document.getElementById("con6");
+    var con7 = document.getElementById("con7");//对作用域链遍历了好多遍
+
+
+    var doc = document;
+    var con1 = doc.getElementById("con1");
+    var con2 = doc.getElementById("con2");
+    var con3 = doc.getElementById("con3");
+    var con4 = doc.getElementById("con4");
+    var con5 = doc.getElementById("con5");
+    var con6 = doc.getElementById("con6");
+    var con7 = doc.getElementById("con7");//无论多少条 都对作用于连遍历1遍
+
+
+    /*
+        双重解释
+     */
+    var abc = new Function("alert(1)");//这种做法就是有了双重解释 要先把字符串“alert(1)”转换成（eval）可以执行的js代码  然后才去执行
+</script>
+</body>
+</html>

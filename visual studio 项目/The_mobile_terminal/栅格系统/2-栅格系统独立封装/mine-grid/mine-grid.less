@@ -1,0 +1,168 @@
+/*全局设置*/
+@import "normalize";
+
+.clearfix {
+    &:after {
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*变量声明区域*/
+//屏幕尺寸阈值
+// 768   992   1200
+@screen-sm: 768px;
+@screen-md: 992px;
+@screen-lg: 1200px;
+
+//container 容器的宽度
+@container-sm-width: 750px;
+@container-md-width: 970px;
+@container-lg-width: 1170px;
+
+// 总的列数
+@grid-columns: 16;
+
+// 列间距
+@grid-gutter-width: 30px;
+
+/*实现*/
+.make-container() {
+    //container 容器
+    .container {
+        //.clearfix();
+        .container-common-show();
+
+        @media (min-width: @screen-sm) {
+            /*小屏幕状态*/
+            width: @container-sm-width;
+        }
+
+        @media (min-width: @screen-md) {
+            /*小屏幕状态*/
+            width: @container-md-width;
+        }
+
+        @media (min-width: @screen-lg) {
+            /*小屏幕状态*/
+            width: @container-lg-width;
+        }
+    }
+
+    // container-fluid 容器
+    .container-fluid {
+        .container-common-show();
+    }
+
+    //容器的公共样式
+    .container-common-show() {
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: @grid-gutter-width / 2;
+        padding-right: @grid-gutter-width / 2;
+        &:extend(.clearfix all);
+    }
+}
+
+.make-container();
+
+//行的实现
+.make-row() {
+    .row {
+        margin-left: -@grid-gutter-width / 2;
+        margin-right: -@grid-gutter-width / 2;
+        &:extend(.clearfix all);
+    }
+}
+.make-row();
+
+//列的实现
+//公共的样式实现
+.make-column() {
+    .col(@index) when ( @index<= @grid-columns) {
+        //声明一个选择器变量
+        @selector: ~'.col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}'; // .col-xs-1
+        .col(@index+1, @selector);
+    }
+    //      2      1     <= 12
+    .col(@index, @list) when ( @index<= @grid-columns) {
+        //    => 1,2  => 1,2,3
+        @selector: ~'@{list},.col-xs-@{index},.col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}'; // 1,2    =>  1,2  ,3
+        //继续调用自己
+        .col(@index + 1, @selector);
+    }
+    .col(@index, @list) when (@index > @grid-columns) {
+        @{list} {
+            position: relative;
+            min-height: 1px;// 27
+            padding-left: ceil((@grid-gutter-width / 2)); //14
+            padding-right: floor((@grid-gutter-width / 2)); // 13
+            float: left;
+        }
+    }
+    .col(1);
+}
+.make-column();
+
+//宽度设置
+.make-grid-columns-width(@type) {
+    .col(@index) when (@index <= @grid-columns) {
+        //拼接选择器
+        @selector: ~'.col-@{type}-@{index}'; // .col-xs-1
+        //设置宽度
+        @{selector} {
+            //@width: 1 / @grid-columns * 100;
+            //width:  ~'@{width}%';
+            width: percentage(@index / @grid-columns);
+        }
+
+        //递归调用
+        .col(@index + 1);
+    }
+
+    .col(1);
+}
+.make-grid-columns-width(xs);
+
+.make-grid-columns-offset(@type) {
+    .col(@index) when (@index <= @grid-columns) {
+        //拼接选择器
+        @selector: ~'.col-@{type}-offset-@{index}'; // .col-xs-1
+        //设置宽度
+        @{selector} {
+            //@width: 1 / @grid-columns * 100;
+            //width:  ~'@{width}%';
+            margin-left: percentage(@index / @grid-columns);
+        }
+
+        //递归调用
+        .col(@index + 1);
+    }
+
+    .col(1);
+}
+.make-grid-columns-offset(xs);
+
+//小屏幕下的尺寸与列偏移设置
+@media (min-width: @screen-sm){
+    .make-grid-columns-width(sm);
+    .make-grid-columns-offset(sm);
+}
+
+//中等屏幕下的尺寸与列偏移设置
+@media (min-width: @screen-md){
+    .make-grid-columns-width(md);
+    .make-grid-columns-offset(md);
+}
+
+//大屏幕下的尺寸与列偏移设置
+@media (min-width: @screen-lg){
+    .make-grid-columns-width(lg);
+    .make-grid-columns-offset(lg);
+}

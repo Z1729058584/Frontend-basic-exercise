@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+.box .header {
+  display: flex;
+  border-left: 1px solid #ccc;
+}
+.box .header p {
+  width: 100px;
+  height: 30px;
+  border-right: 1px solid #ccc;
+}
+.box .header .active {
+  background-color: red;
+}
+.box .content div {
+  text-align: center;
+  width: 302px;
+  height: 200px;
+  line-height: 200px;
+  position: absolute;
+  left: 0;
+  top: 30px;
+  display: none;
+  border: 1px solid #ccc;
+}
+.box .content .show {
+  display: block;
+  background-color: red;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>今天天气真好</p>
+    <button>复制文字</button>
+    <div class="box"></div>
+    <script>
+        var oButton=document.querySelector("button");
+        var oP=document.querySelector("p");
+        var oBox=document.querySelector(".box");
+        oButton.onclick=function(){
+            copy();
+        }
+    function copy(){
+           var oIupt=document.createElement("input");
+           oIupt.value=oP.innerHTML;
+           oBox.appendChild(oIupt);
+           oIupt.select();
+           document.execCommand("copy");
+           oIupt.parentNode.removeChild(oIupt);
+    }
+    </script>
+</body>
+
+</html>

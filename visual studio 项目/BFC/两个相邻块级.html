@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 1）BFC（例如 absolute,overflow,display:none;）块级格式化上下文，一个创建了新的BFC的盒子是独立布局的，盒子里的子元素的样式不会影响盒子外面的元素，在BFC中，两个相邻的兄弟块级元素在垂直方向上是margin发生折叠。 */
+     /* 当父元素不定位或者相对定位的时候，子元素设置margin-top会把父元素顶下来，父元素的margin-top也会和子元素的重复*/
+    #box{
+        /* position: absolute; */
+        position: relative;
+        width: 500px;
+        height: 500px;
+        background-color: red;
+        margin-top:50px;
+    }
+    .one{
+        margin-bottom: 50px;
+        margin-top:50px;
+
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+    .two{
+        margin-top: 50px;
+        width: 100px;
+        height: 100px;
+        background-color: green;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="one"></div>
+        <div class="two"></div>
+    </div>
+</body>
+</html>

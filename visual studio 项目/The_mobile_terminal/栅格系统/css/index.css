@@ -1,0 +1,24 @@
+@import "reset.css";
+.container {
+  width: 9.48148148rem;
+  background-color: #ccc;
+  margin: 0 auto;
+}
+.container .header {
+  width: 600px;
+  background-color: blue;
+  height: 1.48148148rem;
+  margin: 0 auto;
+}
+.container .row {
+  width: 400px;
+  margin: 0 auto;
+}
+.container .row .col-md-3 {
+  color: white;
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: #46185c;
+}

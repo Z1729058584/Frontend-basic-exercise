@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>地图拖拽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        html,
+        body,
+        #app {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+        }
+    </style>
+    <script src="js/myjs.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <img src="./img/map.png" alt="">
+    </div>
+    <script>
+        var oApp = document.querySelector("#app");
+        var oImg = oApp.querySelector("img");
+        var index = 0;
+        oApp.addEventListener("touchstart", function (e) {
+            this.x = e.changedTouches[0].clientX;
+            this.left = transformCSS(oImg, "translateX")
+        })
+        oApp.addEventListener("touchmove", function (e) {
+            this._x = e.changedTouches[0].clientX;
+            var transformX = this._x - this.x + this.left;
+            transformCSS(oImg, "translateX", transformX)
+        })
+        oApp.addEventListener("touchend",function(e){
+        var translateX=transformCSS(oImg,"translateX");
+        var minX=-oImg.offsetWidth-oApp.offsetWidth;
+        var maxX=0;
+        if(translateX<=minX){
+            translateX=minX;
+        }
+        if(translateX>=maxX){
+            translateX=maxX;
+        }
+        transformCSS(oImg,"translateX",translateX)
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{
+        /* overflow:scroll; */
+        height: 1000px;
+    }
+    </style>
+</head>
+<body>
+    <script>
+        //节流
+    var flag=true;
+    window.onscroll=function(){
+        if(!flag){
+           return;
+        }
+        flag=false;
+        console.log("触发滚动了");
+        setTimeout(function(){
+            flag=true;
+        },200)
+    }
+
+    </script>
+</body>
+</html>

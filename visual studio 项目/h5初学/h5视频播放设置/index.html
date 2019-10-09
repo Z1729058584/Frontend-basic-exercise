@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        video::-webkit-media-controls {
+            display: none;
+        }
+
+        #video1 {
+            width: 800px;
+            height: 450px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        #controls {
+            width: 100%;
+            height: 30px;
+            margin-top: -30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #switch {
+            position: relative;
+            width: 100px;
+            height: 25px;
+            line-height: 25px;
+            display: flex;
+            justify-content: space-around;
+        }
+        #switch #turn_on {
+            display: none; 
+        }
+
+        #switch #turn_off {
+            display: block;
+        }
+
+        #switch #time {
+            color: #fff;
+            font-size: 12px;
+        }
+
+        #screen_volume {
+            position: relative;
+            width: 100px;
+            height: 25px;
+            display: flex;
+            justify-content: space-around;
+        }
+        #screen_volume #exit_full {
+            display: none;
+        }
+
+        #screen_volume #full {
+            display: block;
+        }
+
+        #progress_bar {
+            width: 75%;
+            height: 8px;
+            /* padding-right: 16px; */
+            background-color: #ccc;
+            border: 1px solid #000;
+            position: relative;
+        }
+        #progress_bar .sliding1_block {
+            position: absolute;
+            left: 0;
+            top: -4px;
+            z-index: 2;
+            width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        #volume_bar {
+            width: 6px;
+            height: 100px;
+            background-color: #ccc;
+            margin-top: -107px;
+            border: 1px solid #000;
+            display: none;
+        }
+
+        #volume_bar .sliding2_block {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background-color: #fff;
+            margin-left: -3px;
+  
+        }
+    </style>
+    <link href="./img/woman.png" rel="icon" type="image/x-icon"/>
+    <script src="js/myjs.js"></script>
+</head>
+<body>
+<div id="video1">
+        <!-- autoplay="autoplay" muted 设置自动播放的时候必须设置静音 -->
+    <video src="video/你凭什么不努力.mp4" width="100%" height="100%" style="display: block" id="s1"  loop="loop" >
+        <source src="./video/你凭什么不努力.mp4"/>
+        <source src="./video/你凭什么不努力.ogv"/>
+        <source src="./video/你凭什么不努力.webm"/>
+    </video>
+    <div id="controls">
+        <div id="switch">
+            <img src="./img/play.png" width="13" height="25" id="turn_on">
+            <img src="./img/stop.png" width="13" height="25" id="turn_off">
+            <span id="time"><a>0:00</a></span>
+        </div>
+        <div id="progress_bar">
+            <div class="sliding1_block"></div>
+        </div>
+        <div id="screen_volume">
+            <div id="volumes">
+                <div id="volume_bar">
+                    <div class="sliding2_block"></div>
+                </div>
+                <img src="./img/volume.png" alt="" width="15" height="25" id="volume">
+            </div>
+            <img src="./img/full_screen.png" id="full" width="15" height="20">
+            <img src="./img/exit_full.png" id="exit_full" width="15" height="20">
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+
+    var oTurn_on = document.querySelector("#turn_on");
+    var oTurn_off = document.querySelector("#turn_off");
+    var oS1 = document.querySelector("#s1");
+    var oVolume = document.querySelector("#volume");
+    var oVolume_bar = document.querySelector("#volume_bar");
+    var oVideo1 = document.querySelector("#video1");
+    var oFull = document.querySelector("#full");
+    var oExitFull = document.querySelector("#exit_full");
+    var oSliding1_block = document.querySelector(".sliding1_block");
+    var oProgress_bar = document.querySelector("#progress_bar");
+    var oTime = document.querySelector("#time");
+    var oA = oTime.querySelector("a");
+    var flag = true;
+    var everystep = 0;
+    var timer3 = null;
+    var dleft = 0;
+    var oS1crrtT = 0;
+    var oS1crrtTStart=0;
+
+    window.onresize=function(){
+        videoTimer();
+        newTime1(oS1crrtT);
+    }
+    // 页面加载完以后,获取视频的总时长
+    window.addEventListener("load", videoTimer);
+    function videoTimer(){
+        time2 = Math.round(oS1.duration);
+        everystep =(oProgress_bar.offsetWidth-16)/ time2;
+        oTime.innerHTML = oA.innerHTML + "/" + Math.floor(oS1.duration / 60) + ":" + Math.round(oS1.duration - (Math.floor(oS1.duration / 60) * 60));
+        
+    }
+    //获取播放的时间
+    function Time1_step(oS1crrtT) {
+        
+        oSliding1_block.style.left=Math.round(oS1crrtT) * everystep+"px";
+        oA.innerHTML = Math.floor(oS1crrtT/ 60) + ":" + Math.round(oS1crrtT - (Math.floor(oS1crrtT / 60) * 60));
+        oTime.innerHTML = oA.innerHTML + "/" + Math.floor(oS1.duration / 60) + ":" + Math.round(oS1.duration - (Math.floor(oS1.duration / 60) * 60));
+        
+    };
+   
+    function newTime1(){
+        timer3 = setInterval(function(){
+            oS1crrtTStart=oS1.currentTime;
+            Time1_step(oS1crrtTStart)
+        },1000);
+    
+    };
+    // 开始播放
+    oTurn_off.onclick = function () {
+        oS1.play();
+        oTurn_off.style.display = "none";
+        oTurn_on.style.display = "block";
+        newTime1()
+    };
+        // 停止播放
+        oTurn_on.onclick = function () {
+            oS1.pause();
+            clearInterval(timer3);
+            oTurn_off.style.display = "block";
+            oTurn_on.style.display = "none";
+        };
+        //播放完后
+        oS1.onended=function(){
+            oTurn_off.style.display = "block";
+            oTurn_on.style.display = "none";
+            console.log(1);
+            
+        }
+        // 调节音量
+        oVolume.onclick = function () {
+            if (flag) {
+                oVolume_bar.style.display = "block";
+            } else {
+                oVolume_bar.style.display = "none";
+            }
+            flag = !flag;
+        };
+        // 开启全屏兼容
+        oFull.onclick = function () {
+            if (oVideo1.requestFullscreen) {
+                oVideo1.requestFullscreen();
+            }
+            //FireFox
+            else if (oVideo1.mozRequestFullScreen) {
+                oVideo1.mozRequestFullScreen();
+            }
+            //Chrome等
+            else if (oVideo1.webkitRequestFullScreen) {
+                oVideo1.webkitRequestFullScreen();
+            }
+            //IE11
+            else if (oVideo1.msRequestFullscreen) {
+                oVideo1.msRequestFullscreen();
+            }
+            oFull.style.display = "none";
+            oExitFull.style.display = "block";
+        };
+        // 退出全屏
+        oExitFull.onclick = function () {
+            document.exitFullscreen();
+            oFull.style.display = "block";
+            oExitFull.style.display = "none";
+        };
+// 鼠标按下并拖动进度条
+        oSliding1_block.onmousedown = function (ev) {
+            var e = ev || window.event;
+            var sleft = e.clientX - my.getEleToDoc(oSliding1_block).left;
+            document.onmousemove = function (ev) {
+                var e = ev || window.event;
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                dleft = e.clientX - sleft - my.getEleToDoc(oProgress_bar).left;
+                if (dleft <= 0) {
+                    dleft = 0;
+                } else if (dleft >= oProgress_bar.offsetWidth-16) {
+                    dleft = oProgress_bar.offsetWidth-16 ;
+                }
+                oS1.currentTime= dleft/everystep;
+                oS1crrtT=oS1.currentTime;
+                Time1_step(oS1crrtT);
+            };
+            document.onmouseup = function () {
+                document.onmouseup = document.onmousemove = null;
+            }
+        };
+
+
+</script>
+</html>

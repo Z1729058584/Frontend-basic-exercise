@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box{
+        /* width: 100%; */
+        width:800px;
+        background-color: red;
+        height: 100px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <p>
+        星星如此闪耀，星光是美好的，你也是吗？星星如此闪耀，星光是美好的，你也是吗？星星如此闪耀，星光是美好的，你也是吗？
+    </p>
+    <script>
+    console.log(window.devicePixelRatio);//像素比 物理像素比上设备独立像素
+    console.log(window.screen.width);//理想视口的大小
+    console.log(window.innerWidth);//视觉视口大小
+    console.log(window.document.documentElement.clientWidth);//布局视口大小
+    </script>
+</body>
+</html>
